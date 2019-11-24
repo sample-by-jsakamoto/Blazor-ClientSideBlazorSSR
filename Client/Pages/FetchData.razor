@@ -1,6 +1,7 @@
 ﻿@page "/fetchdata"
 @using ClientSideBlazorSSR.Shared
-@inject HttpClient Http
+@using Microsoft.Extensions.DependencyInjection
+@inject IServiceProvider Services
 
 <h1>Weather forecast</h1>
 
@@ -40,7 +41,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("WeatherForecast");
+        var httpClient = Services.GetService<HttpClient>();
+        if (httpClient != null)
+        {
+            forecasts = await httpClient.GetJsonAsync<WeatherForecast[]>("WeatherForecast");
+        }
     }
 
 }
