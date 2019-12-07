@@ -1,6 +1,6 @@
 ﻿@page "/fetchdata"
 @using ClientSideBlazorSSR.Shared
-@inject HttpClient Http
+@inject IWeatherForecastService WeatherForecastService
 
 <h1>Weather forecast</h1>
 
@@ -40,7 +40,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("WeatherForecast");
+        forecasts = await WeatherForecastService.GetForecastAsync();
     }
 
 }
