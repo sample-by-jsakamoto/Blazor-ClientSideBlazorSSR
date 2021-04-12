@@ -1,3 +1,5 @@
+using ClientSideBlazorSSR.Server.Services;
+using ClientSideBlazorSSR.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +23,8 @@ namespace ClientSideBlazorSSR.Server
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<IWeatherForecastService, ServerSideWeatherForecastService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
